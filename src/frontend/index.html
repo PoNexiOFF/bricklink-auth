@@ -12,8 +12,33 @@
     <div id="bricklinkContainer"></div>
     <script type="module">
         import { createBricklinkButton } from "./bricklinkButton.js";
-        createBricklinkButton("bricklinkContainer");
+
+        createBricklinkButton("bricklinkContainer", (result) => {
+            if (result.success) {
+                console.log("Verified!", result);
+
+                const container = document.getElementById("bricklinkContainer");
+
+                container.innerHTML = "";
+
+                const loggedDiv = document.createElement("div");
+                loggedDiv.style.width = "100%";
+                loggedDiv.style.height = "100vh";
+                loggedDiv.style.backgroundColor = "black";
+                loggedDiv.style.color = "white";
+                loggedDiv.style.display = "flex";
+                loggedDiv.style.alignItems = "center";
+                loggedDiv.style.justifyContent = "center";
+                loggedDiv.style.fontSize = "2rem";
+                loggedDiv.textContent = "Logged";
+
+                document.body.appendChild(loggedDiv);
+            } else {
+                console.error("Failed!", result);
+            }
+        });
     </script>
+
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 import { verifyKeys } from "./bricklinkAPI.js";
 
-export function createBricklinkButton(containerId) {
+export function createBricklinkButton(containerId, callback) {
   const container = document.getElementById(containerId);
 
   const button = document.createElement("button");
@@ -19,11 +19,13 @@ export function createBricklinkButton(containerId) {
       <input type="text" placeholder="BRICKLINK_SECRET" id="blSecret" />
       <input type="text" placeholder="TOKEN_KEY" id="tokenKey" />
       <input type="text" placeholder="TOKEN_SECRET" id="tokenSecret" />
-      <div class="bl-popup-buttons">
-        <button id="blCancel">Annuler</button>
-        <button id="blSubmit">Vérifier</button>
+      <div class="bl-popup-buttons-wrapper">
+        <div id="blResult"></div>
+        <div class="bl-popup-buttons">
+          <button id="blCancel">Annuler</button>
+          <button id="blSubmit">Vérifier</button>
+        </div>
       </div>
-      <div id="blResult"></div>
     </div>
   `;
   container.appendChild(popup);
@@ -46,12 +48,19 @@ export function createBricklinkButton(containerId) {
       tokenSecret: popup.querySelector("#tokenSecret").value.trim(),
     };
 
-    const { status, data, error } = await verifyKeys(payload)
+    const { status, data, error } = await verifyKeys(payload);
 
-    if (data.success) {
-      console.log("Keys are valid ✅", data.text);
+    if (callback && typeof callback === "function") {
+      callback(data || { success: false, error });
+    }
+
+    if (!data?.success) {
+      resultDiv.style.color = "red";
+      resultDiv.textContent = "❌ Invalid keys!";
+      console.error("Keys are invalid ❌", data?.text ?? error);
     } else {
-      console.error("Keys are invalid ❌", data.text ?? error);
+      resultDiv.textContent = "";
+      console.log("Keys are valid ✅", data.text);
     }
   });
 }

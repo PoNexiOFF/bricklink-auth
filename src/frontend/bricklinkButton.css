@@ -1,4 +1,4 @@
-    .bl-verify-button {
+.bl-verify-button {
     background: #FFD700;
     border: none;
     padding: 10px 20px;
@@ -7,32 +7,38 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-    }
-    .bl-verify-button:hover {
+}
+
+.bl-verify-button:hover {
     background: #FFC300;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .bl-popup-backdrop {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bl-popup-backdrop {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    }
-    .bl-popup {
+}
+
+.bl-popup {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     max-width: 400px;
     width: 90%;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     font-family: sans-serif;
-    }
-    .bl-popup input {
+}
+
+.bl-popup input {
     width: 100%;
     margin: 8px 0;
     padding: 10px;
@@ -40,8 +46,9 @@
     border-radius: 6px;
     font-size: 14px;
     box-sizing: border-box;
-    }
-    .bl-popup button {
+}
+
+.bl-popup button {
     background: #FFD700;
     border: none;
     padding: 8px 16px;
@@ -49,23 +56,38 @@
     cursor: pointer;
     font-weight: 600;
     transition: all 0.2s ease;
-    }
-    .bl-popup button:hover {
+}
+
+.bl-popup button:hover {
     background: #FFC300;
-    }
-    .bl-popup-buttons {
+}
+
+.bl-popup-buttons {
     display: flex;
     justify-content: flex-end;
     margin-top: 12px;
-    }
-    .bl-popup-buttons button:first-child {
+}
+
+.bl-popup-buttons button:first-child {
     margin-right: 10px;
     background: #ccc;
-    }
-    .bl-popup-buttons button:first-child:hover {
+}
+
+.bl-popup-buttons button:first-child:hover {
     background: #bbb;
-    }
-    #blResult {
-    margin-top: 10px;
-    font-weight: 600;
-    }
+}
+
+.bl-popup-buttons-wrapper {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-top: 12px;
+  min-height: 24px;  
+}
+
+#blResult {
+  font-weight: 600;
+  color: red;  
+  text-align: center;
+  min-width: 120px; 
+}
