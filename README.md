@@ -26,18 +26,15 @@ The package includes both a **backend server** and **frontend components**.
 
 ## Project Structure
 
-> [!WARNING]
-> 
-
 ```bash
 bricklink-auth/
 ├─ src/
 │  ├─ backend/
-│  │  └─ server.js         # Express server for key verification
+│  │  └─ server.js                # Express server for key verification
 │  └─ frontend/
-│     ├─ bricklinkAPI.js   # Frontend fetch wrapper for server
-│     ├─ bricklinkButton.js # Main button component
-│     └─ bricklinkButton.css # Button and popup styling
+│     ├─ bricklinkAPI.js          # Frontend fetch wrapper for server
+│     ├─ bricklinkButton.js       # Main button component
+│     └─ bricklinkButton.css      # Button and popup styling
 ├─ package.json
 └─ README.md
 ```
@@ -78,14 +75,14 @@ const __dirname = path.dirname(__filename);
 
 // Launch the BrickLink Auth server from the npm package
 const serverProcess = spawn(
-  "node",
-  [path.join(__dirname, "node_modules/bricklink-auth/src/backend/server.js")],
-  { stdio: "inherit" }
+    "node",
+    [path.join(__dirname, "node_modules/bricklink-auth/src/backend/server.js")],
+    { stdio: "inherit" }
 );
 
 // Listen for the backend server process to exit and log the code
 serverProcess.on("close", (code) => {
-  console.log(`BrickLink server exited with code ${code}`);
+    console.log(`BrickLink server exited with code ${code}`);
 });
 
 // Set up a simple Express server to serve the frontend demo
@@ -96,7 +93,7 @@ app.use(express.static(path.join(__dirname, ".")));
 
 // Start the frontend demo server on port 4000
 app.listen(4000, () => {
-  console.log("Demo front running on http://localhost:4000");
+    console.log("Demo front running on http://localhost:4000");
 });
 ```
 
@@ -107,22 +104,36 @@ Include the button in your HTML page:
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>BrickLink Auth Demo</title>
+    <meta charset="UTF-8">
+    <title>BrickLink Auth Demo</title>
 </head>
 <body>
-  <!-- Container where the BrickLink Auth button will be injected -->
-  <div id="bricklink-container"></div>
+    <!-- Container where the BrickLink Auth button will be injected -->
+    <div id="bricklink-container"></div>
 
-  <script type="module">
-    // Import the createBricklinkButton function from the npm package
-    import { createBricklinkButton } from './node_modules/bricklink-auth/src/frontend/bricklinkButton.js';
+    <script type="module">
+        // Import the createBricklinkButton function from the npm package
+        import { createBricklinkButton } from './node_modules/bricklink-auth/src/frontend/bricklinkButton.js';
 
-    // Inject the button into the container
-    createBricklinkButton("bricklink-container");
+        // Inject the button into the container
+        createBricklinkButton("bricklink-container");
   </script>
 </body>
 </html>
+```
+
+### Getting the verification result
+You can pass a **callback function** to `createBricklinkButton` to get the result of the key verification:
+```js
+import { createBricklinkButton } from "./node_modules/bricklink-auth/src/frontend/bricklinkButton.js";
+
+createBricklinkButton("bricklinkContainer", (result) => {
+    if (result.success) {
+        console.log("Keys are valid ✅", result);
+    } else {
+        console.error("Keys are invalid ❌", result);
+    }
+});
 ```
 
 ### Verifying Keys Programmatically
