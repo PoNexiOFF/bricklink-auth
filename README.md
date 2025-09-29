@@ -60,8 +60,21 @@ npm run build
 
 ## Usage
 
+
+
 ### Quick Demo with server.js
 If you want to quickly test the BrickLink Auth button in a basic HTML page without setting up a backend yourself, you can use a `server.js` file at the root of your project like this:
+
+To make this demo work, you need to have the following packages installed in your project:
+
+**1. bricklink-auth – the main package for the button and key verification:**
+```bash
+npm install bricklink-auth
+```
+**2. Install all required dependencies from bricklink-auth:**
+```bash
+npm install
+```
 
 ```js
 import { spawn } from "child_process"; // Used to launch another Node.js process (the backend server)
@@ -95,6 +108,11 @@ app.use(express.static(path.join(__dirname, ".")));
 app.listen(4000, () => {
     console.log("Demo front running on http://localhost:4000");
 });
+```
+
+**3. Start the server:**
+```bash
+node server.js
 ```
 
 ### Using the frontend button
